@@ -10,3 +10,6 @@ build/
 dist/ 
 *.log logs/ 
 *.tmp tmp/
+.venv
+.env
+instance/database.sqlite3
