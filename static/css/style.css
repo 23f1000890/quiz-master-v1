@@ -1,0 +1,15 @@
+.login-body h3 {
+    color: red;
+    text-align: center;
+}
+
+.login-body h2 {
+    text-align: center;
+    color: blue;
+}
+
+.login-body .btn {
+    text-align: center;
+    background-color: blue;
+    border: none;
+}

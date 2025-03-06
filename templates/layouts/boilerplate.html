@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="It is a multi-user app that acts as an exam preparation site for multiple courses.">
+    <title>IntelliQuest</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer"  
+    />
+</head>
+<body>
+    <div id="navbar">{% block navbar %}{% endblock %} </div>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" 
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
