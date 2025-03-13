@@ -1,0 +1,35 @@
+{% extends "layouts/boilerplate.html" %}
+
+{% block content %}
+    <div class="add-body row-g-3 mt-3">
+        <div class="col-6 offset-3">
+            <h2>Edit Quiz</h2>
+            <form action="{{url_for('admin.edit_quiz', quiz_id=quiz.quiz_id)}}" method="POST">
+                <div class="mb-3 col-12">
+                    <label for="chapter_id" class="form-label">Chapter ID:</label>
+                    <select name="chapter_id" id="chapter_id" class="form-control" placeholder="Enter the Chapter's ID">
+                        <option selected>{{quiz.chapter.chapter_id}}</option>
+                        <option disabled>Select a Chapter</option>
+                        {% for chapter in chapters %}
+                            <option value="{{chapter.chapter_id}}">{{chapter.chapter_id}} ({{chapter.chapter_name}}) </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="date_of_quiz" class="form-label">Quiz Date:</label>
+                    <input type="date" name="date_of_quiz" value="{{quiz.date_of_quiz.strftime('%Y-%m-%d')}}" id="date_of_quiz" class="form-control" placeholder="dd/mm/yyyy">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="time_duration" class="form-label">Quiz Duration:</label>
+                    <input type="text" name="time_duration" value="{{quiz.time_duration}}" id="time_duration" class="form-control" placeholder="HH:MM">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="remarks" class="form-label">Remarks:</label>
+                    <textarea name="remarks" id="remarks" class="form-control">{{quiz.remarks}}</textarea>
+                </div>
+                <button type="submit" class="btn btn-success mt-3">Save</button>
+                <a href="{{url_for('admin.quiz_dashboard')}}" class="btn btn-success mt-3">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

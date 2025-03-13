@@ -1,0 +1,63 @@
+{% extends "layouts/boilerplate.html" %}
+
+{% block content %}
+    <div class="add-body row-g-3 mt-3">
+        <div class="col-6 offset-3">
+            <h2>New Question</h2>
+            <form action="{{url_for('admin.add_question', quiz_id=quiz_id)}}" method="POST">
+                <div class="mb-3 col-12">
+                    <label for="chapter_id" class="form-label">Chapter ID:</label>
+                    <input type="text" name="chapter_id" id="chapter_id" value="{{quiz.chapter.chapter_id}}" class="form-control" readonly>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="question_title" class="form-label">Question Title:</label>
+                    <input type="text" name="question_title" id="question_title" class="form-control" placeholder="Enter the Question title" required>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="question_statement" class="form-label">Question Statement:</label>
+                    <textarea name="question_statement" id="question_statement" class="form-control" required></textarea>
+                </div>
+                <div class="col-6 offset-3">
+                    <h3 class="mb-3 text-center text-danger">Single Option Correct</h3>
+                    <div class="mb-3 col-12">
+                        <label class="form-label">Options:</label>
+                        <input type="text" class="form-control mb-3" name="option1" placeholder="Option 1:" required>
+                        <input type="text" class="form-control mb-3" name="option2" placeholder="Option 2:" required>
+                        <input type="text" class="form-control mb-3" name="option3" placeholder="Option 3:" required>
+                        <input type="text" class="form-control mb-3" name="option4" placeholder="Option 4:" required>
+                    </div>
+                    <div class="mb-3 col-12">
+                        <label for="correct_answer" class="form-label">Correct Answer:</label>
+                        <select name="correct_answer" class="form-control" id="correct_answer" required>
+                            <option selected>Select Correct Answer</option>
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                            <option value="option4">Option 4</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="mb-3 col-12">
+                    <div class="mb-3 col-12">
+                        <label for="question_title" class="form-label">Question Title:</label>
+                        <input type="text" name="question_title" id="question_title" class="form-control" placeholder="Enter the Question title" required>
+                    </div>
+                    <div class="mb-3 col-12">
+                        <label for="question_title" class="form-label">Question Title:</label>
+                        <input type="text" name="question_title" id="question_title" class="form-control" placeholder="Enter the Question title" required>
+                    </div>
+                    <div class="mb-3 col-12">
+                        <label for="question_title" class="form-label">Question Title:</label>
+                        <input type="text" name="question_title" id="question_title" class="form-control" placeholder="Enter the Question title" required>
+                    </div>
+                    <div class="mb-3 col-12">
+                        <label for="question_title" class="form-label">Question Title:</label>
+                        <input type="text" name="question_title" id="question_title" class="form-control" placeholder="Enter the Question title" required>
+                    </div>
+                </div> -->
+                <button type="submit" class="btn btn-success mt-3 mb-3">Save</button>
+                <a href="{{url_for('admin.quiz_dashboard')}}" class="btn btn-success mt-3 mb-3">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

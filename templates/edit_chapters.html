@@ -1,0 +1,21 @@
+{% extends "layouts/boilerplate.html" %}
+
+{% block content %}
+    <div class="add-body row-g-3 mt-3">
+        <div class="col-6 offset-3">
+            <h2>Edit Chapter</h2>
+            <form method="POST" action="{{ url_for('admin.edit_chapter', chapter_id=chapter.chapter_id) }}">
+                <div class="mb-3 col-12">
+                    <label for="chapter_name" class="form-label">Name:</label>
+                    <input type="text" name="chapter_name" value="{{chapter.chapter_name}}" id="chapter_name" class="form-control" placeholder="Edit chapter">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea name="description" id="description" class="form-control" placeholder="Edit description">{{chapter.description}}</textarea>
+                </div>
+                <button type="submit" class="btn btn-success mt-3">Update</button>
+                <a href="{{url_for('admin.admin_dashboard')}}" class="btn btn-success mt-3">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

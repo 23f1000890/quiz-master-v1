@@ -13,3 +13,4 @@ dist/
 .venv
 .env
 instance/database.sqlite3
+.hintrc

@@ -1,15 +1,26 @@
-.login-body h3 {
+.form-body h3 {
     color: red;
     text-align: center;
 }
 
-.login-body h2 {
+.form-body h2 {
     text-align: center;
     color: blue;
 }
 
-.login-body .btn {
+.form-body .btn {
     text-align: center;
     background-color: blue;
     border: none;
 }
+
+.add-body h2 {
+    color: red;
+    text-align: center;
+}
+
+.add-body btn {
+    background-color: blue;
+    border: none;
+}
+

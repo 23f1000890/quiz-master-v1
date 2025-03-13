@@ -1,0 +1,64 @@
+{% extends "layouts/boilerplate.html" %}
+
+{% block navbar %}
+    <div class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
+        <div class="container-fluid">
+            <div class="navbar-nav">
+                <a href="{{ url_for('admin.admin_dashboard') }}" class="nav-link btn btn-info"><strong><em>Home</em></strong></a>
+                <a href="{{ url_for('admin.quiz_dashboard') }}" class="nav-link btn btn-info"><strong><em>Quiz</em></strong></a>
+                <a href="{{ url_for('user.login') }}" class="nav-link btn btn-info"><strong><em>Logout</em></strong></a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <form class="d-flex" role="search" action="{{ url_for('admin.admin_dashboard') }}" method="GET">
+                  <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search Destinations" aria-label="Search">
+                  <button class="btn btn-search btn-success" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <a href="{{ url_for('admin.user_details') }}" class="nav-link btn btn-info me-3"><strong><em>--USER DETAILS--</em></strong></a>
+                <h3>Welcome {{ reg_admin.full_name }} </h3>
+            </div> 
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-3">
+        <div class="row-g-3">
+            <div class="col-6 offset-3">
+                <h1 style="color: turquoise" class="mt-3 mb-3 col-6 offset-3">Welcome to the Admin Dashboard</h1>
+                <div class="d-flex flex-wrap gap-3 justify-content-around">
+                    {% for subject in subjects %}
+                        <div class="card">
+                            <div class="card-header bg-dark text-white text-center">
+                                <strong><em>{{ subject.subject_name }}</em></strong>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped mb-3 table-bordered">
+                                    <tr class="table-primary">
+                                        <th>Chapter Name</th>
+                                        <th>No of questions</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    {% for chapter in subject.chapters %}
+                                        <tr>
+                                            <td>{{chapter.chapter_name}}</td>
+                                            <td> {{ chapter.quizzes | map(attribute='question_count') | sum }} </td>
+                                            <td>
+                                                <a href="{{url_for('admin.edit_chapter', chapter_id=chapter.chapter_id)}}" class="btn btn-success">Edit</a>
+                                                <a href="{{url_for('admin.delete_chapter', chapter_id=chapter.chapter_id)}}" class="btn btn-success">Delete</a>
+                                            </td>
+                                    {% endfor %}
+                                </table>
+                                <a href="{{url_for('admin.add_chapter', subject_id=subject.subject_id)}}" class="btn btn-info mb-3 mt-3 ms-3">+ Chapter</a>
+                                <a href="{{url_for('admin.edit_subject', subject_id=subject.subject_id)}}" class="btn btn-success">Edit Subject</a>
+                                <a href="{{url_for('admin.delete_subject', subject_id=subject.subject_id)}}" class="btn btn-danger">Delete Subject</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <a href="{{ url_for('admin.add_subject') }}" class="btn btn-info text-center mb-3 mt-3 col-6 offset-3">+ Add New Subject</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
