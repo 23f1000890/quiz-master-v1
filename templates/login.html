@@ -15,7 +15,7 @@
             {% endwith %}
             <h2>Welcome to IntelliQuest</h2>
             <h3>Login</h3>
-            <form action="{{ url_for('user.login') }}" method="POST">
+            <form action="{{ url_for('app_user.login') }}" method="POST">
                 <div class="mb-3 col-12">
                     <label for="email" class="form-label">Email:</label>
                     <input type="text" name="email" id="email" class="form-control" placeholder="Enter your Email" required>
@@ -28,7 +28,7 @@
             </form>
             <div class="d-flex align-items-center gap-2 mt-3 mb-3">
                 <h3>Create new user?</h3> 
-                <a href="{{ url_for('user.register') }}"><button type="submit" class="btn btn-primary">Register</button></a>
+                <a href="{{ url_for('app_user.register') }}"><button type="submit" class="btn btn-primary">Register</button></a>
             </div>
         </div>
     </div>

@@ -1,0 +1,58 @@
+{% extends "layouts/boilerplate.html" %}
+
+{% block navbar %}
+    <div class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
+        <div class="container-fluid">
+            <div class="navbar-nav">
+                <a href="{{ url_for('app_user.user_dashboard', user_id = reg_user.user_id) }}" class="nav-link btn btn-info"><strong><em>Home</em></strong></a>
+                <a href="{{ url_for('app_user.submit_quiz', user_id = reg_user.user_id) }}" class="nav-link btn btn-info"><strong><em>Scores</em></strong></a>
+                <a href="{{ url_for('app_user.login') }}" class="nav-link btn btn-info"><strong><em>Logout</em></strong></a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <form class="d-flex" role="search" action="#" method="GET">
+                  <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search Destinations" aria-label="Search">
+                  <button class="btn btn-search btn-success" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <a href="#" class="nav-link btn btn-info me-3"><strong><em>--SUMMARY--</em></strong></a>
+                <h3>Welcome {{reg_user.full_name}}</h3>
+            </div> 
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="add-body row-g-3 mt-3">
+        <div class="col-6 offset-3">
+            <h2>View the Quiz</h2>
+            <form action="{{url_for('app_user.user_dashboard', user_id=reg_user.user_id)}}" method="GET">
+                <div class="mb-3 col-12">
+                    <label for="quiz_id" class="form-label">ID:</label>
+                    <input type="text" class="form-control" name="quiz_id" id="quiz_id" value="{{quiz.quiz_id}}" readonly>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="subject_name" class="form-label">Subject:</label>
+                    <input type="text" class="form-control" name="subject_name" id="subject_name" value="{{quiz.chapter.subject.subject_name}}" readonly>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="chapter_name" class="form-label">Chapter:</label>
+                    <input type="text" class="form-control" name="chapter_name" id="chapter_name" value="{{quiz.chapter.chapter_name}}" readonly>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="num_questions" class="form-label">No of Questions:</label>
+                    <input type="text" class="form-control" name="num_questions" id="num_questions" value="{{quiz.questions | length}}" readonly>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="date_of_quiz" class="form-label">Scheduled Date:</label>
+                    <input type="date" class="form-control" name="date_of_quiz" id="date_of_quiz" value="{{quiz.date_of_quiz.strftime('%Y-%m-%d')}}" readonly>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="time_duration" class="form-label">Duration(HH:MM):</label>
+                    <input type="text" class="form-control" name="time_duration" id="time_duration" value="{{quiz.time_duration}}" readonly>
+                </div>
+                <button type="submit" class="btn btn-outline-danger mt-3 mb-3 col-6 offset-3">Close</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "layouts/boilerplate.html" %}
+
+{% block navbar %}
+    <div class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
+        <div class="container-fluid">
+            <div class="navbar-nav">
+                <a href="{{ url_for('app_user.user_dashboard', user_id = reg_user.user_id) }}" class="nav-link btn btn-info"><strong><em>Home</em></strong></a>
+                <a href="{{ url_for('app_user.submit_quiz', user_id = reg_user.user_id) }}" class="nav-link btn btn-info"><strong><em>Scores</em></strong></a>
+                <a href="{{ url_for('app_user.login') }}" class="nav-link btn btn-info"><strong><em>Logout</em></strong></a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <form class="d-flex" role="search" action="#" method="GET">
+                  <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search Destinations" aria-label="Search">
+                  <button class="btn btn-search btn-success" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <a href="#" class="nav-link btn btn-info me-3"><strong><em>--SUMMARY--</em></strong></a>
+                <h3>Welcome {{reg_user.full_name}}</h3>
+            </div> 
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-3">
+        <div class="row-g-3">
+            <div class="col-6 offset-3">
+                <h1 style="color: tomato" class="mt-3 mb-3 col-6 offset-3">-- SCORE BOARD--</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped mb-3 table-bordered">
+                            <tr class="table-info">
+                                <th>ID</th>
+                                <th>No of Questions</th>
+                                <th>Attempt Time & Date</th>
+                                <th>Score</th>
+                            </tr>
+                            {% for score in scores %}
+                                <tr>
+                                    <td>{{score.score_id}}</td>
+                                    <td>{{score.quiz.question_count}}</td>
+                                    <td>{{score.time_stamp_of_attempt.strftime('%Y-%m-%d %H:%M:%S')}}</td>
+                                    <td>{{ score.total_scored }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

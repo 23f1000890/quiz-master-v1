@@ -14,9 +14,13 @@ def user_details():
 @admin.route("/admin_dashboard/")
 def admin_dashboard():
     reg_admin = User.query.filter_by(user_type="Admin").first_or_404()
-    subjects = Subject.query.all()
+    query = request.args.get("search", "").strip() # Get the search query from URL
+    if query:
+        subjects = Subject.query.filter(Subject.subject_name.ilike(f"%{query}%")).all()
+    else:
+        subjects = Subject.query.all()
     
-    return render_template("admin_dashboard.html", reg_admin=reg_admin, subjects=subjects)
+    return render_template("admin_dashboard.html", reg_admin=reg_admin, subjects=subjects, query=query)
 
 
 # Subject Management - Create, Add, Update, Delete
@@ -227,3 +231,12 @@ def delete_question(question_id):
         db.session.commit()
         return redirect(url_for("admin.quiz_dashboard"))
     return "Question not found", 404
+
+@admin.route("/delete_user/<int:user_id>")
+def delete_user(user_id):
+    user = User.query.get(user_id)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        return redirect(url_for("admin.user_details"))
+    return "ERROR", 404

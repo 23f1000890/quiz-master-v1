@@ -42,7 +42,7 @@ class Quiz(db.Model):
     remarks = db.Column(db.Text)
 
     questions = db.relationship("Question", backref="quiz", cascade="all, delete") # A quiz can have multiple questions
-    scores = db.relationship("Score", backref="quiz", cascade="all, delete") # A quiz can have multiple scores.
+    scores = db.relationship("Score", backref="quiz", cascade="all, delete", lazy=True) # A quiz can have multiple scores.
 
     @property
     def question_count(self):

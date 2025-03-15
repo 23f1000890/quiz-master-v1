@@ -2,7 +2,7 @@
 from flask import Flask
 from flask import redirect, url_for
 from model.models import db, User
-from controllers.users import user
+from controllers.users import app_user
 from controllers.admin import admin
 from datetime import datetime
 from dotenv import load_dotenv
@@ -30,13 +30,13 @@ with app.app_context():
         db.session.commit()
 
 #registering blueprints to connect app to controllers
-app.register_blueprint(user) # User route
+app.register_blueprint(app_user) # User route
 app.register_blueprint(admin) # Admin route
 
 @app.route("/")
 def app_server():
-    return redirect(url_for("user.login"))
+    return redirect(url_for("app_user.login"))
 
 #run app
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3030, debug=True) 
+    app.run(host="0.0.0.0", port=3000, debug=True) 
