@@ -1,9 +1,8 @@
 from flask import Blueprint
-from flask import redirect, url_for, render_template, request, flash, session
+from flask import redirect, url_for, render_template, request, flash
 from model.models import * # import all from models.py
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime
-import logging
 
 app_user = Blueprint("app_user", __name__, template_folder="templates", static_folder="static")
 
