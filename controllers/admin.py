@@ -7,9 +7,20 @@ admin = Blueprint("admin", __name__, template_folder="templates", static_folder=
 
 @admin.route("/user_details/")
 def user_details():
-    users = User.query.filter_by(user_type="user").all()
+    query = request.args.get("search", "").strip() # Get the search query from URL
+    if query:
+        users = User.query.filter(
+            (User.username.ilike(f"%{query}%"))|
+            (User.password.ilike(f"%{query}%"))|
+            (User.full_name.ilike(f"%{query}%"))|
+            (User.email.ilike(f"%{query}%"))|
+            (User.qualification.ilike(f"%{query}%"))
+        ).filter_by(user_type="user").all()
+    else:
+        users = User.query.filter_by(user_type="user").all()
+    
     reg_admin = User.query.filter_by(user_type="Admin").first_or_404()
-    return render_template("user_details.html", users=users, reg_admin=reg_admin)
+    return render_template("user_details.html", users=users, reg_admin=reg_admin, query=query)
 
 @admin.route("/admin_dashboard/")
 def admin_dashboard():
@@ -120,9 +131,19 @@ def delete_chapter(chapter_id):
 @admin.route("/quiz_dashboard/")
 def quiz_dashboard():
     reg_admin = User.query.filter_by(user_type="Admin").first_or_404()
-    quizzes = Quiz.query.all()
+    query = request.args.get("search", "").strip() # Get the search query from URL
+    if query:
+        quizzes = Quiz.query.filter(
+            (Quiz.quiz_id.ilike(f"%{query}%"))|
+            (Quiz.chapter_id.ilike(f"%{query}%"))|
+            (Quiz.date_of_quiz.ilike(f"%{query}%"))|
+            (Quiz.time_duration.ilike(f"%{query}%"))|
+            (Quiz.remarks.ilike(f"%{query}%"))
+        ).all()
+    else:
+        quizzes = Quiz.query.all()
     
-    return render_template("quiz_dashboard.html", reg_admin=reg_admin, quizzes=quizzes)
+    return render_template("quiz_dashboard.html", reg_admin=reg_admin, quizzes=quizzes, query=query)
 
 
 @admin.route("/add_quiz/", methods = ["GET", "POST"])

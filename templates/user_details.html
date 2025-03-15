@@ -8,6 +8,12 @@
                 <a href="{{ url_for('app_user.login') }}" class="nav-link btn btn-info"><strong><em>Logout</em></strong></a>
             </div>
             <div class="navbar-nav ms-auto">
+                <form class="d-flex" role="search" action="{{ url_for('admin.user_details') }}" method="GET">
+                  <input class="form-control me-2 search-inp" type="text" name="search" placeholder="Search Destinations" value="{{ query }}">
+                  <button class="btn btn-search btn-success" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="navbar-nav ms-auto">
                 <a href="{{ url_for('admin.user_details') }}" class="nav-link btn btn-info me-3"><strong><em>--USER DETAILS--</em></strong></a>
                 <h3>Welcome {{ reg_admin.full_name }} </h3>
             </div> 
