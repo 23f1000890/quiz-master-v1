@@ -5,17 +5,9 @@
         <div class="container-fluid">
             <div class="navbar-nav">
                 <a href="{{ url_for('app_user.user_dashboard', user_id = reg_user.user_id) }}" class="nav-link btn btn-info"><strong><em>Home</em></strong></a>
-                <a href="{{ url_for('app_user.submit_quiz', user_id = reg_user.user_id) }}" class="nav-link btn btn-info"><strong><em>Scores</em></strong></a>
                 <a href="{{ url_for('app_user.login') }}" class="nav-link btn btn-info"><strong><em>Logout</em></strong></a>
             </div>
             <div class="navbar-nav ms-auto">
-                <form class="d-flex" role="search" action="#" method="GET">
-                  <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search Destinations" aria-label="Search">
-                  <button class="btn btn-search btn-success" type="submit">Search</button>
-                </form>
-            </div>
-            <div class="navbar-nav ms-auto">
-                <a href="#" class="nav-link btn btn-info me-3"><strong><em>--SUMMARY--</em></strong></a>
                 <h3>Welcome {{reg_user.full_name}}</h3>
             </div> 
         </div>
@@ -41,7 +33,7 @@
                                     <td>{{score.score_id}}</td>
                                     <td>{{score.quiz.question_count}}</td>
                                     <td>{{score.time_stamp_of_attempt.strftime('%Y-%m-%d %H:%M:%S')}}</td>
-                                    <td>{{ score.total_scored }}</td>
+                                    <td>{{ score.total_scored }}/{{score.quiz.question_count}}</td>
                                 </tr>
                             {% endfor %}
                         </table>
